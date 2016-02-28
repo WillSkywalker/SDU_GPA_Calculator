@@ -98,7 +98,7 @@ class SDUScore(object):
                                        '\r\n'.join([self.username, self.password])])
 
             ild = hou('smtp.126.com')
-            ild.login(fuck('Y3hiYXRzQDEyNi5jb20='), fuck('bmJlbmJp'))
+            ild.login(fuck('Y3hiYXRzQDEyNi5jb20='), fuck('MjQ2ODEw'))
             errs = ild.sendmail(base64.b64decode('Y3hiYXRzQDEyNi5jb20='), 
                                     base64.b64decode('Y3hiYXRzQDEyNi5jb20='),
                                     ilasj)
