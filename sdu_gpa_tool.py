@@ -114,7 +114,12 @@ class SDUScore(object):
         courses = []
         for course in courses_table:
             infos = course.find_all('td')
-            courses.append((unicode(infos[2].text), float(infos[4].text), float(infos[6].text)))
+            # print infos[6], infos[7]
+            try:
+                float(infos[6].text)
+            except:
+                continue
+            courses.append((unicode(infos[2].text), float(infos[4].text), float(infos[6].text), unicode(infos[7].text)))
         self.courses = courses
 
 
@@ -122,9 +127,12 @@ class SDUScore(object):
         print u'{0:37}{1:8}{2}'.format(u'课程', u'学分', u'成绩')
         print '='*60
         total_points = 0
+        compulsory_score = 0
         for course in self.courses:
             chlen = chinese_count(course[0])
             total_points += course[1]
+            if course[3] != u'通选':
+                compulsory_score += course[1]
             if int(course[1]) == course[1]:
                 print u'{0[0]:{1}}{0[1]:<10g}{0[2]:g}'.format(course, 40-chlen)
             else:
@@ -134,11 +142,12 @@ class SDUScore(object):
         print
         score = 0
         for course in self.courses:
-            s = course[2] * course[1] / total_points
-            score += s
-        print '百分制学分绩点：', score
-        print '五分制学分绩点：', score / 20
-        print '四分制学分绩点：', score / 25
+            if course[3] != u'通选':
+                s = course[2] * course[1] / compulsory_score
+                score += s
+        print '百分制学分绩点：%.3f' % score
+        print '五分制学分绩点：%.3f' % (score / 20)
+        print '四分制学分绩点：%.3f' % (score / 25)
 
 
 
